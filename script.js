@@ -1,3 +1,5 @@
+
+
 const canvas = document.querySelector('#canvas');
 const context = canvas.getContext("2d");
 
@@ -124,8 +126,31 @@ tl
 .to(".panelism", {scale: 2, ease: "circ"}, "fifteen")
 }
 
+
+const lenis = new Lenis();
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
+
 window.addEventListener("resize", function(){
   loadImage(Math.floor(frames.currentIndex))
+});
+
+document.querySelectorAll(".headings h3")
+.forEach(function(elem) {
+  gsap.from(elem, {
+    scrollTrigger: {
+      trigger: elem,
+      start: "top 90%",
+      end: "bottom 20%",
+      scrub: 2
+    },
+    opacity: 0.3,
+  })
 })
 
 preLoadImages();
